@@ -5,3 +5,4 @@ idea/
 sqlite3.db
 *.json
 chromedriver-linux64
+.idea
