@@ -75,7 +75,6 @@ class YelpSpider(scrapy.Spider):
 
         with SelenAuto("chrome", 'spiders/chromedriver-linux64/chromedriver') as drv:
             drv.driver_get_page(url)
-            # time.sleep(2)
             drv.wait_until_element_presence(By.TAG_NAME, 'footer', 5)
             drv.scroll_to_element(By.TAG_NAME, 'footer')
             drv.wait_until_element_presence(
@@ -119,7 +118,7 @@ class YelpSpider(scrapy.Spider):
 
     @staticmethod
     def _get_categories():
-        with open('data/get_categories/get_categories.json', 'r') as f:
+        with open('data/get_categories/categories.json', 'r') as f:
             data = f.read()
             return json.loads(data)[0]['categories']
 
