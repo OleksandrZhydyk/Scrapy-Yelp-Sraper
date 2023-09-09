@@ -53,8 +53,13 @@ SPIDER_MIDDLEWARES = {
    # "yelp_parser.middlewares.YelpParserSpiderMiddleware": 543,
 }
 
-# SCRAPEOPS_API_KEY = "bce40f20-914b-4ac2-beb5-077628b1424f"
-# SCRAPEOPS_PROXY_ENABLED = True
+
+FEEDS = {
+    'data/%(name)s/%(name)s_%(time)s.json': {
+        'format': 'json',
+        'overwrite': True
+        }
+}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html

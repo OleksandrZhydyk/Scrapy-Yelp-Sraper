@@ -33,6 +33,7 @@ class YelpSpider(scrapy.Spider):
                     url = f"https://www.yelp.com/search?find_desc={category}&find_loc={location}"
                     yield scrapy.Request(get_proxy_url(url), callback=self.parse)
         if self.category and self.location:
+            print(self.location)
             url = f"https://www.yelp.com/search?find_desc={self.category}&find_loc={self.location}"
             yield scrapy.Request(get_proxy_url(url), callback=self.parse)
         else:
@@ -74,7 +75,8 @@ class YelpSpider(scrapy.Spider):
 
         with SelenAuto("chrome", 'spiders/chromedriver-linux64/chromedriver') as drv:
             drv.driver_get_page(url)
-            time.sleep(2)
+            # time.sleep(2)
+            drv.wait_until_element_presence(By.TAG_NAME, 'footer', 5)
             drv.scroll_to_element(By.TAG_NAME, 'footer')
             drv.wait_until_element_presence(
                 By.CSS_SELECTOR,
@@ -117,7 +119,7 @@ class YelpSpider(scrapy.Spider):
 
     @staticmethod
     def _get_categories():
-        with open('data/categories.json', 'r') as f:
+        with open('data/get_categories/get_categories.json', 'r') as f:
             data = f.read()
             return json.loads(data)[0]['categories']
 
